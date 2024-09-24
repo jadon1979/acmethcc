@@ -5,3 +5,29 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+order_items = [{
+    name: 'Rugiet ED Strong',
+    dosage: '1 troche',
+    quantity: 3,
+    instructions: 'Take 1 troche 30 minutes before sex',
+    price: 150.00
+}]
+
+user = User.create(
+    email: 'user@example.com',
+    credit_card_number: '4111 1111 1111 1111',
+    expiry: '08/27',
+    cvv: 988,
+    password: 'Password1!',
+    password_confirmation: 'Password1!',
+)
+doctor = Doctor.create(email: 'doctor@example.com', password: 'Password1!', password_confirmation: 'Password1!')
+
+order = Order.create(user: user, doctor: doctor, order_items: order_items, total: 450.00)
+
+Message.create(user: user, order: order, message: 'Can I get some more information on this product?')
+Message.create(doctor: doctor, order: order, message: 'Sure, I can help you with that. What do you need to know?')
+Message.create(user: user, order: order, message: 'What is the dosage?')
+Message.create(user: user, order: order, message: 'Hello?')
+Message.create(user: user, order: order, message: 'Doc, are you there?')
