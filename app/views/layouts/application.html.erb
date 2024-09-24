@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <%= render HeaderComponent.new %>
+    <%= render HeaderComponent.new(user: current_user) %>
     <%= yield %>
     <%= render FooterComponent.new %>
   </body>

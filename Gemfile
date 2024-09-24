@@ -79,3 +79,9 @@ gem "devise", "~> 4.9"
 gem "view_component", "~> 3.14"
 
 gem "tailwindcss-rails", "~> 2.7"
+
+gem "stimulus_reflex", "~> 3.5"
+
+gem "action-cable-redis-backport", "~> 1"
+
+gem "redis-session-store", "~> 0.11.5"

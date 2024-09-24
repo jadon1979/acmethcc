@@ -22,7 +22,7 @@ same kinds of challenges you'll face in the real application.
 ## The Task
 
 Our users sometimes need to contact our customer care team. Add a customer care user that can chat with our users and
-the doctor on a given order.
+the doctor about a given order.
 The customer care user should be able to see all messages in the system, but doctors can't see messages
 between the user and the customer care user and users can't see messages between the doctor and the customer care user.
 Also write a test plan for our QA tester to be put in the PR.
