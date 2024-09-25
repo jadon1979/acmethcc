@@ -26,6 +26,6 @@ class Message < ApplicationRecord
   default_scope { order(created_at: :desc) }
 
   belongs_to :user, optional: true
-  belongs_to :doctor, class_name: 'Doctor', foreign_key: 'doctor_id', optional: true
+  belongs_to :doctor, class_name: 'User', foreign_key: 'doctor_id', optional: true
   belongs_to :order
 end

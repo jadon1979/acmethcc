@@ -7,10 +7,8 @@
         <p>Created At: <%= order.created_at %></p>
         <p>Updated At: <%= order.updated_at %></p>
     </div>
-    <div id="messages" class="h-full">
-        <div class="h-full">
-            <%= render MessagesComponent.new(order.messages) %>
-            <%= render partial: "messages/form", locals: { order: order } %>
-        </div>
+    <div class="h-full">
+        <%= render MessagesComponent.new(order.messages) %>
+        <%= render partial: "messages/form", locals: { order: order } %>
     </div>
 </div>

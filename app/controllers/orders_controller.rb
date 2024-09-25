@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = current_user.orders
+    @orders = current_user.is_doctor ? current_user.doctor_orders : current_user.orders
+    puts "Orders: #{@orders.inspect}"
   end
 
   # GET /orders/1 or /orders/1.json

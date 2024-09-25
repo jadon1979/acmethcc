@@ -22,12 +22,17 @@ user = User.create(
     password: 'Password1!',
     password_confirmation: 'Password1!',
 )
-doctor = Doctor.create(email: 'doctor@example.com', password: 'Password1!', password_confirmation: 'Password1!')
+doctor = User.create(
+    email: 'doctor@example.com',
+    password: 'Password1!',
+    password_confirmation: 'Password1!',
+    is_doctor: true
+)
 
-order = Order.create(user: user, doctor: doctor, order_items: order_items, total: 450.00)
+order = Order.create(user: user, doctor: doctor, order_items: order_items, total: 450.00, created_at: Time.now - 3.days)
 
-Message.create(user: user, order: order, message: 'Can I get some more information on this product?')
-Message.create(doctor: doctor, order: order, message: 'Sure, I can help you with that. What do you need to know?')
-Message.create(user: user, order: order, message: 'What is the dosage?')
-Message.create(user: user, order: order, message: 'Hello?')
-Message.create(user: user, order: order, message: 'Doc, are you there?')
+Message.create(user: user, order: order, message: 'Can I get some more information on this product?', created_at: Time.now - 2.days)
+Message.create(doctor: doctor, order: order, message: 'Sure, I can help you with that. What do you need to know?', created_at: Time.now - 2.days)
+Message.create(user: user, order: order, message: 'What is the dosage?', created_at: Time.now - 1.day)
+Message.create(user: user, order: order, message: 'Hello?', created_at: Time.now - 2.hours)
+Message.create(user: user, order: order, message: 'Doc, are you there?', created_at: Time.now)

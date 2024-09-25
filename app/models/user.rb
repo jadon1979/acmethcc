@@ -8,6 +8,7 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  expiry                 :string
+#  is_doctor              :boolean          default(FALSE)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -27,11 +28,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :messages
 
-  def doctor?
-    self.is_a?(Doctor)
-  end
-
-  def user?
-    self.is_a?(User)
+  def doctor_orders
+    Order.where(doctor_id: self.id)
   end
 end
