@@ -1,0 +1,10 @@
+<div id="send_message" class="mt-4">
+    <% if flash[:error] %>
+        <p class="text-red-500"><%= flash[:error] %></p>
+    <% end %>
+    <%= form_for(Message.new) do |f| %>
+        <%= f.hidden_field :order_id, value: order.id %>
+        <%= f.text_field :message, class: "w-full" %>
+        <%= f.submit "Send", class: "btn btn-primary" %>
+    <% end %>
+</div>

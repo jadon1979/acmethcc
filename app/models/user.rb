@@ -26,4 +26,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :orders
   has_many :messages
+
+  def doctor?
+    self.is_a?(Doctor)
+  end
+
+  def user?
+    self.is_a?(User)
+  end
 end
