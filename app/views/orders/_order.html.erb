@@ -1,14 +1,12 @@
-<div class="columns-2">
-    <div class="h-full" id="<%= dom_id order %>">
-        <h2>Order ID: <%= order.id %></h2>
-        <p>Doctor: <%= render partial: "doctor", locals: { doctor: order.doctor } %></p>
-        <p>Total: <%= order.total %></p>
+<div class="p-2">
+    <div class="h-full w-full bg-white shadow rounded-lg text-gray-800 p-2 id="<%= dom_id order %>">
+        <h2 class="font-semibold">Order ID: <%= order.id %></h2>
+        <p class="text-sm">
+          <strong>Doctor:</strong>
+          <%= render partial: "doctor", locals: { doctor: order.doctor } %>
+        </p>
+        <p class="text-sm"><strong>Total:</strong> $<%= order.total %></p>
+        <p class="text-sm"><strong>Ordered on:</strong> <%= order.created_at.strftime('%m/%d%Y') %></p>
         <%= render partial: "order_item", collection: eval(order.order_items) %>
-        <p>Created At: <%= order.created_at %></p>
-        <p>Updated At: <%= order.updated_at %></p>
-    </div>
-    <div class="h-full">
-        <%= render MessagesComponent.new(order.messages) %>
-        <%= render partial: "messages/form", locals: { order: order } %>
     </div>
 </div>

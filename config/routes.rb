@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  resources :messages, only: [:create]
+
   # Defines the root path route ("/")
   root "orders#index"
-  resources :messages, only: [:create]
 end

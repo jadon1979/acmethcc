@@ -1,8 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<h1 class="text-2xl">Orders</h1>
+<h1 class="text-2xl text-gray-800 p-2">Orders</h1>
 
-<div id="orders">
+<div id="orders" class="bg-gray-100 h-1/4 rounded-md flex flex-wrap justify-left overflow-x-auto overflow-hidden">
   <% @orders.each do |order| %>
     <%= render order %>
   <% end %>

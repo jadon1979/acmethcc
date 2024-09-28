@@ -81,4 +81,6 @@ config.cache_store = :redis_cache_store, {
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.assets.debug = true
 end
