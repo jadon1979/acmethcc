@@ -1,0 +1,12 @@
+#!/bin/sh
+
+bundle install --jobs 8
+echo "**** STARTING ENV****"
+bash -lc "bundle exec rails dev:cache"
+bash -lc "bundle exec rails assets:precompile"
+bash -lc "bundle exec rails db:migrate
+echo "**** ENV STARTED****"
+
+#bash -c "rails s -b 0.0.0.0"
+
+bash
