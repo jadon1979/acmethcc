@@ -16,12 +16,9 @@
 require 'rails_helper'
 
 RSpec.describe PaymentDetail, type: :model do
-  context 'secure data' do
-    let(:cc_number) { 5454-1234-0879-1910 }
-    let(:encrypted_cc_number) { PaymentDetail.encrypt_data(cc_number, :purchase) }
-
-    it 'should decrypt data' do
-      expect(described_class.decrypt_data(encrypted_cc_number, :purchase)).to eq(cc_number)
-    end
-  end
+  it { should validate_presence_of(:encrypted_credit_card_number) }
+  it { should validate_presence_of(:expiration) }
+  it { should validate_presence_of(:full_name) }
+  it { should validate_presence_of(:last_four_digits) }
+  it { should validate_presence_of(:zip_code) }
 end

@@ -6,33 +6,19 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-order_items = [{
-    name: 'Rugiet ED Strong',
-    dosage: '1 troche',
-    quantity: 3,
-    instructions: 'Take 1 troche 30 minutes before sex',
-    price: 150.00
-}]
+# Password comes from the :user factory.
+# Since this will never see a production environment then the password is "Password1!"
+user = FactoryBot.create(:user, email: 'user@example.com', user_type: User.user_types['user'])
+doctor = FactoryBot.create(:user, email: 'doctor@example.com', user_type: User.user_types['doctor'])
+support = FactoryBot.create(:user, email: 'support@example.com', user_type: User.user_types['customer_care'])
 
-user = User.create(
-    email: 'user@example.com',
-    credit_card_number: '4111 1111 1111 1111',
-    expiry: '08/27',
-    cvv: 988,
-    password: 'Password1!',
-    password_confirmation: 'Password1!',
-)
-doctor = User.create(
-    email: 'doctor@example.com',
-    password: 'Password1!',
-    password_confirmation: 'Password1!',
-    is_doctor: true
-)
+order = FactoryBot.create(:order, user: user, doctor: doctor)
+payment_detail = FactoryBot.create(:payment_detail, user: user)
+FactoryBot.create(:order_payment_detail, order: order, payment_detail: payment_detail)
 
-order = Order.create(user: user, doctor: doctor, order_items: order_items, total: 450.00, created_at: Time.now - 3.days)
+# Message.create(user: user, order: order, message: 'Can I get some more information on this product?', created_at: Time.now - 2.days)
+# Message.create(doctor: doctor, order: order, message: 'Sure, I can help you with that. What do you need to know?', created_at: Time.now - 2.days)
+# Message.create(user: user, order: order, message: 'What is the dosage?', created_at: Time.now - 1.day)
+# Message.create(user: user, order: order, message: 'Hello?', created_at: Time.now - 2.hours)
+# Message.create(user: user, order: order, message: 'Doc, are you there?', created_at: Time.now)
 
-Message.create(user: user, order: order, message: 'Can I get some more information on this product?', created_at: Time.now - 2.days)
-Message.create(doctor: doctor, order: order, message: 'Sure, I can help you with that. What do you need to know?', created_at: Time.now - 2.days)
-Message.create(user: user, order: order, message: 'What is the dosage?', created_at: Time.now - 1.day)
-Message.create(user: user, order: order, message: 'Hello?', created_at: Time.now - 2.hours)
-Message.create(user: user, order: order, message: 'Doc, are you there?', created_at: Time.now)

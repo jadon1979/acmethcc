@@ -22,18 +22,25 @@
 #
 FactoryBot.define do
   factory :order do
-    user
-    doctor
+    transient do
+      total_items { rand(1..4) }
+    end
+
+    association :user
+    association :doctor
+
     order_items {
-      [{
-        name: Faker::ElectricalComponents.electromechanical,
-        dosage: "#{rand(1..4)} troche",
-        quantity: rand(1..4),
-        instructions: Faker::Lorem.sentence,
-        price: Faker::Commerce.price
-      }]
+      total_items.times.map do
+        {
+          name: Faker::ElectricalComponents.electromechanical,
+          dosage: "#{rand(1..4)} troche",
+          quantity: rand(1..4),
+          instructions: Faker::Lorem.sentence,
+          price: Faker::Commerce.price
+        }
+      end
     }
-    total { Faker::Commerce.price }
-    messages
+
+    total { order_items.sum { |o| o[:quantity] * o[:price] } }
   end
 end

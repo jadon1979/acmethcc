@@ -22,8 +22,8 @@
 #
 FactoryBot.define do
   factory :order_payment_detail do
-    order
-    payment_detail
+    association :order
+    association :payment_detail
     total { Faker::Commerce.price }
   end
 end

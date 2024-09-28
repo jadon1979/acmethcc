@@ -15,12 +15,19 @@
 #
 class PaymentDetail < ApplicationRecord
   belongs_to :user
-  has_many :orders
+  has_many :order_payment_details
+  has_many :orders, through: :order_payment_details
 
   enum payment_type: {
     credit_card: 0,
     gift_card: 0
   }
+
+  validates :encrypted_credit_card_number, presence: true
+  validates :expiration, presence: true
+  validates :full_name, presence: true
+  validates :last_four_digits, length: { is: 4 }, presence: true
+  validates :zip_code, presence: true, length: { minimum: 5 }
 
   # @param [String] data that is to be encrypted (credit card number, ssn, etc)
   # @param [Symbol] purpose of use (:purchase, :subscribe, etc)

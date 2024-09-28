@@ -22,6 +22,7 @@ FactoryBot.define do
     expiration { Faker::Business.credit_card_expiry_date }
     last_four_digits { rand(1000..9999) }
     payment_type { 0 }
-    user
+    association :user
+    zip_code { Faker::Address.zip_code }
   end
 end

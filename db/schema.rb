@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_28_161304) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_28_185932) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "doctor_id"
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_161304) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.boolean "is_doctor", default: false
+    t.integer "user_type", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

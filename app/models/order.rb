@@ -24,4 +24,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :doctor, class_name: 'User', foreign_key: 'doctor_id'
   has_many :messages, dependent: :destroy
+
+  has_many :order_payment_details
+  has_many :payment_details, through: :order_payment_details
 end
