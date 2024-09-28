@@ -1,6 +1,6 @@
 # README
 
-This is the take home project for the interview process at Rugiet.
+This is the take home project for the interview process at ACME.
 
 ## Setup
 

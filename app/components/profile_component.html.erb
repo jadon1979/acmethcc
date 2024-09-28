@@ -1,5 +1,4 @@
-<div class="profile-component">
-    <%= @user.email %>
-    <hr>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+<div class="profile-component justift-items-start grid grid-cols-2">
+    <span><%= @user.email %></span>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary text-right" %>
 </div>
