@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_25_191719) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_28_161304) do
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "doctor_id"
@@ -21,6 +21,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_191719) do
     t.index ["doctor_id"], name: "index_messages_on_doctor_id"
     t.index ["order_id"], name: "index_messages_on_order_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "order_payment_details", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "payment_detail_id", null: false
+    t.decimal "total"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_payment_details_on_order_id"
+    t.index ["payment_detail_id"], name: "index_order_payment_details_on_payment_detail_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -34,10 +45,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_191719) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "payment_details", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "encrypted_credit_card_number"
+    t.string "full_name"
+    t.string "expiration"
+    t.integer "last_four_digits"
+    t.string "zip_code"
+    t.integer "payment_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
-    t.string "credit_card_number"
-    t.string "expiry"
-    t.string "cvv"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false
@@ -53,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_25_191719) do
   add_foreign_key "messages", "orders"
   add_foreign_key "messages", "users"
   add_foreign_key "messages", "users", column: "doctor_id"
+  add_foreign_key "order_payment_details", "orders"
+  add_foreign_key "order_payment_details", "payment_details"
   add_foreign_key "orders", "users"
   add_foreign_key "orders", "users", column: "doctor_id"
 end
