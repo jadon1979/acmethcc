@@ -10,14 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_28_185932) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_29_015757) do
+  create_table "message_channels", force: :cascade do |t|
+    t.integer "initiator_id"
+    t.integer "responder_id"
+    t.integer "status", default: 0
+    t.integer "message_for", default: 0
+    t.integer "message_for_id", default: 0
+    t.integer "updated_by"
+    t.string "close_reason"
+    t.integer "messages_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["initiator_id"], name: "index_message_channels_on_initiator_id"
+    t.index ["responder_id"], name: "index_message_channels_on_responder_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer "user_id"
     t.integer "doctor_id"
-    t.integer "order_id", null: false
+    t.integer "order_id"
     t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "message_channel_id", null: false
     t.index ["doctor_id"], name: "index_messages_on_doctor_id"
     t.index ["order_id"], name: "index_messages_on_order_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
@@ -70,6 +86,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_28_185932) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "message_channels", "users", column: "initiator_id"
+  add_foreign_key "message_channels", "users", column: "responder_id"
   add_foreign_key "messages", "orders"
   add_foreign_key "messages", "users"
   add_foreign_key "messages", "users", column: "doctor_id"

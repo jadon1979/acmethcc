@@ -25,9 +25,23 @@ FactoryBot.define do
     password_confirmation { 'Password1!'}
   end
 
-  factory :doctor, class: 'User' do
+  factory :doctor, class: User do
     email { Faker::Internet.email }
     user_type { 1 }
+    password { 'Password1!'}
+    password_confirmation { 'Password1!'}
+  end
+
+  factory :responder, class: User do
+    email { Faker::Internet.email }
+    user_type { 2 }
+    password { 'Password1!'}
+    password_confirmation { 'Password1!'}
+  end
+
+  factory :initiator, class: User do
+    email { Faker::Internet.email }
+    user_type { 2 }
     password { 'Password1!'}
     password_confirmation { 'Password1!'}
   end

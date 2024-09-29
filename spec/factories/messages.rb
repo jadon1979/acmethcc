@@ -23,27 +23,10 @@
 #  order_id   (order_id => orders.id)
 #  user_id    (user_id => users.id)
 #
-class Message < ApplicationRecord
-  default_scope { order(created_at: :desc) }
-
-  belongs_to :user, optional: true
-  belongs_to :doctor, class_name: 'User', foreign_key: 'doctor_id', optional: true
-  belongs_to :order, optional: true
-  belongs_to :message_channel, counter_cache: true
-
-  after_create :change_message_channel_status
-
-  after_create_commit :stream_message
-
-  def change_message_channel_status
-    return if message_channel.status != 'pending'
-
-    message_channel.opened!
-  end
-
-  private
-
-  def stream_message
-    MessageStreamChannel.broadcast_to(self, { message: message, channel: self })
+FactoryBot.define do
+  factory :message do
+    association :user
+    association :message_channel
+    message { Faker::Lorem.sentence }
   end
 end

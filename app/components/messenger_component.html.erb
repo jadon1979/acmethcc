@@ -1,0 +1,48 @@
+<div class="mt-4" data-controller="messenger">
+  <div class="grid grid-cols-2">
+    <div class="h-full 1/2 overflow-y-auto p-4 border-r">
+      <%
+        if message_channels.any?
+          message_channels.each do |channel|
+      %>
+        <div
+          data-action="click->messenger#selectChannel"
+          data-channel-id="<%= channel.id %>"
+          class="p-2 bg-blue-500 text-white border-b hover:bg-blue-600 cursor-pointer">
+            <%= channel.responder.email %>
+        </div>
+      <%
+          end
+        else
+      %>
+        You have started no conversations
+      <% end %>
+    </div>
+    <div class="w-full h-full">
+      <div class="message-container p-4">
+        <div class="messages-list min-h-[150px] border overflow-auto max-h-32 mb-4 p-2">
+
+        </div>
+
+        <form data-action="submit->messenger#submitMessage" id="message-form">
+          <input type="hidden" id="channel-id" data-messenger-target="channelId" />
+          <div class="message-input mb-2">
+            <input
+              type="text"
+              id="content"
+              class="w-full p-2 border rounded"
+              placeholder="Type your message..."
+              data-messenger-target="content" />
+          </div>
+          <div class="text-right">
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+              Send
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+

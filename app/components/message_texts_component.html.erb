@@ -1,0 +1,21 @@
+<% if @messages && @messages.any? %>
+  <% @messages.sort { |a, b| a[:id] <=> b[:id] }.each do |msg| %>
+    <% if msg.user.id == @user.id %>
+      <div class="mb-2 text-right">
+        <p class="bg-blue-500 text-white text-md rounded-lg py-2 px-4 inline-block text-right">
+          <%= msg.user.email %>: <%= msg.message %>
+        </p><br />
+        <span class="text-gray-500 text-xs"><%= msg.created_at.strftime("%m/%d/%Y %H:%M ") %></span>
+      </div>
+    <% else %>
+      <div class="mb-2 text-left">
+        <p class="bg-green-500 text-white text-md rounded-lg py-2 px-4 inline-block text-left">
+          <%= msg.user.email %>: <%= msg.message %>
+        </p><br />
+        <span class="text-gray-500 text-xs"><%= msg.created_at.strftime("%m/%d/%Y %H:%M ") %></span>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <p class="text-gray-500 text-sm">How can we help you?</p>
+<% end %>
